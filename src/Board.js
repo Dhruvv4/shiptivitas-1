@@ -56,6 +56,17 @@ export default class Board extends React.Component {
     );
   }
 
+  componentDidMount() {
+    Dragula([
+      this.swimlanes.backlog.current,
+      this.swimlanes.inProgress.current,
+      this.swimlanes.complete.current,
+    ]).on("drop", function(el, target, source, sibling) {
+      el.classList.remove(el.classList[1]);
+      el.classList.add(sibling.classList[1]);
+    });
+  }
+
   render() {
     return (
       <div className="Board">
